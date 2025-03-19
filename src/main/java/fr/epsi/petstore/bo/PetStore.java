@@ -1,12 +1,30 @@
 package fr.epsi.petstore.bo;
 
+import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
+@Entity
+@Table(name="PetStore")
 public class PetStore implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
+    @Column(name="name")
     private String name;
+    @Column(name="managerName")
     private String managerName;
+
+    @ManyToMany(mappedBy = "petstores")
+    private Set<Product> products;
+
+    @OneToMany(mappedBy = "petStore", cascade = CascadeType.ALL)
+    private Set<Animal> animals;
+
+    @OneToOne
+    private Address address;
 
     public PetStore() {
     }

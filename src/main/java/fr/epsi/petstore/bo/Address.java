@@ -1,13 +1,24 @@
 package fr.epsi.petstore.bo;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 
+@Entity
+@Table(name="Address")
 public class Address implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
+    @Column(name="number")
     private String number;
+    @Column(name="street")
     private String street;
+    @Column(name="zipCode")
     private String zipCode;
+    @Column(name="city")
     private String city;
 
     public Address() {

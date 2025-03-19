@@ -1,13 +1,27 @@
 package fr.epsi.petstore.bo;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name="Animal")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Animal implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
+    @Column(name="birth")
     private Date birth;
+    @Column(name="couleur")
     private String couleur;
+
+    @ManyToOne
+    @JoinColumn(name = "id_pet")
+    private PetStore petStore;
 
     public Animal() {
     }

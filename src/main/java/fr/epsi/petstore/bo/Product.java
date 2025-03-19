@@ -1,14 +1,35 @@
 package fr.epsi.petstore.bo;
 
-import java.io.Serializable;
+import fr.epsi.petstore.enums.ProdType;
 
+import jakarta.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
+
+@Entity
+@Table(name="Product")
 public class Product implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long id;
+    @Column(name="code")
     private String code;
+    @Column(name="label")
     private String label;
-    private Enum type;
+    @Column(name="type")
+    @Enumerated(EnumType.STRING)
+    private ProdType type;
+    @Column(name="price")
     private Double price;
+
+    @ManyToMany
+    @JoinTable(name="Pro_Pet",
+        joinColumns = @JoinColumn(name="id_pro", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name="id_pet", referencedColumnName = "id")
+    )
+    private Set<PetStore> petStores;
 
     public Product() {
     }
@@ -37,11 +58,11 @@ public class Product implements Serializable {
         this.label = label;
     }
 
-    public Enum getType() {
+    public ProdType getType() {
         return type;
     }
 
-    public void setType(Enum type) {
+    public void setType(ProdType type) {
         this.type = type;
     }
 
