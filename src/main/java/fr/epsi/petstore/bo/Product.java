@@ -31,6 +31,10 @@ public class Product implements Serializable {
     )
     private Set<PetStore> petStores;
 
+    @ManyToOne
+    @JoinColumn(name = "id_pet")
+    private PetStore petStore;
+
     public Product() {
     }
 
@@ -72,6 +76,22 @@ public class Product implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Set<PetStore> getPetStores() {
+        return petStores;
+    }
+
+    public void setPetStores(Set<PetStore> petStores) {
+        this.petStores = petStores;
+    }
+
+    public PetStore getPetStore() {
+        return petStore;
+    }
+
+    public void setPetStore(PetStore petStore) {
+        this.petStore = petStore;
     }
 
     @Override

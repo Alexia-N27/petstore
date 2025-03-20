@@ -8,7 +8,7 @@ import java.util.Date;
 @Entity
 @Table(name="Animal")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Animal implements Serializable {
+public abstract class Animal implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +48,14 @@ public class Animal implements Serializable {
 
     public void setCouleur(String couleur) {
         this.couleur = couleur;
+    }
+
+    public PetStore getPetStore() {
+        return petStore;
+    }
+
+    public void setPetStore(PetStore petStore) {
+        this.petStore = petStore;
     }
 
     @Override

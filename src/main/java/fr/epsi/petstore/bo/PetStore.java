@@ -17,13 +17,14 @@ public class PetStore implements Serializable {
     @Column(name="managerName")
     private String managerName;
 
-    @ManyToMany(mappedBy = "petstores")
+    @ManyToMany(mappedBy = "petStores")
     private Set<Product> products;
 
     @OneToMany(mappedBy = "petStore", cascade = CascadeType.ALL)
     private Set<Animal> animals;
 
     @OneToOne
+    @JoinColumn(name = "address_id")
     private Address address;
 
     public PetStore() {
@@ -53,6 +54,30 @@ public class PetStore implements Serializable {
         this.managerName = managerName;
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    public Set<Animal> getAnimals() {
+        return animals;
+    }
+
+    public void setAnimals(Set<Animal> animals) {
+        this.animals = animals;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "PetStore{" +
@@ -61,4 +86,5 @@ public class PetStore implements Serializable {
                 ", managerName='" + managerName + '\'' +
                 '}';
     }
+
 }
